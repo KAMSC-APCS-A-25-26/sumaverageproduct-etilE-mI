@@ -13,7 +13,6 @@ import java.util.regex.Pattern;
 public class SumProductAverageTest {
 
     private static List<Double> extractAllDoubles(String output, String label) {
-        // Look for the label anywhere in the output, followed by any number
         Pattern p = Pattern.compile(
                 "\\b" + Pattern.quote(label) + "\\b[^\\d]*([\\d.Ee+-]+)",
                 Pattern.CASE_INSENSITIVE
@@ -55,14 +54,12 @@ public class SumProductAverageTest {
         List<Double> products = extractAllDoubles(output, "Product");
         List<Double> averages = extractAllDoubles(output, "Average");
 
-        // Check if we found any results at all
         if (sums.size() == 0 && products.size() == 0 && averages.size() == 0) {
             fail("❌ No results found! Make sure your program outputs lines containing 'Sum', 'Product', and 'Average' with numbers.\n" +
                  "Example: 'Sum: 10.5' or 'The sum is 10.5'\n" +
                  "Your output was:\n" + output);
         }
 
-        // Check for missing results
         if (sums.size() == 0) {
             fail("❌ No 'Sum' results found! Your program should output sum calculations.\n" +
                  "Look for lines like 'Sum: 10.5' or 'The sum is 10.5'\n" +
@@ -79,7 +76,6 @@ public class SumProductAverageTest {
                  "Your output was:\n" + output);
         }
 
-        // Check for wrong number of results
         if (sums.size() != 3) {
             fail("❌ Expected 3 sum calculations, but found " + sums.size() + ".\n" +
                  "Your program should process 3 lines of input and output 3 sets of results.\n" +
@@ -101,7 +97,6 @@ public class SumProductAverageTest {
 
         double eps = 1e-9;
         
-        // Test first set: 222.2 222.2 222.2
         if (Math.abs(sums.get(0) - 666.5999999999999) > eps) {
             fail("❌ Wrong sum for first set (222.2 222.2 222.2)!\n" +
                  "Expected: 666.6, but got: " + sums.get(0) + "\n" +
@@ -118,7 +113,6 @@ public class SumProductAverageTest {
                  "Check your division: (222.2 + 222.2 + 222.2) ÷ 3 = ?");
         }
         
-        // Test second set: 3.14159 25.6 17
         if (Math.abs(sums.get(1) - 45.74159) > eps) {
             fail("❌ Wrong sum for second set (3.14159 25.6 17)!\n" +
                  "Expected: 45.74159, but got: " + sums.get(1) + "\n" +
@@ -135,7 +129,6 @@ public class SumProductAverageTest {
                  "Check your division: (3.14159 + 25.6 + 17) ÷ 3 = ?");
         }
         
-        // Test third set: 100 0 55.6
         if (Math.abs(sums.get(2) - 155.6) > eps) {
             fail("❌ Wrong sum for third set (100 0 55.6)!\n" +
                  "Expected: 155.6, but got: " + sums.get(2) + "\n" +
